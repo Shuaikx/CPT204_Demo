@@ -134,17 +134,35 @@ public class Sorting {
     }
 
     //------------------------------------------------------------------------------------------------------------------
+    // Heap Sort is also O(n logn), but requires no additional array space, so it's more space efficient
+    public static <E extends Comparable<E>> E[] heapSort(E[] list) {
+        // Create a Heap of E
+        Heap<E> heap = new Heap<E>();
+
+        // Add elements to the heap
+        for (int i = 0; i < list.length; i++) {
+            heap.add(list[i]);
+        }
+
+        // Remove the highest elements from the heap
+        for (int i = list.length - 1; i >= 0; i--) {
+            list[i] = heap.remove();
+        }
+        return list;
+    }
     public static void main(String[] args) {
         // double[] list = new double[20];
         // list = randomInitiate(list);
-        double[] list = {4,3,5,2,6,1,7,9,8,0};
+        // double[] list = {2.0, 3.0, 2, 5, 6, 1, -2, 3, 14, 12};
+        Double[] list = {2.0, 3.0, 2.0, 5.0, 6.0, 1.0, -2.0, 3.0, 14.0, 12.0};
 
         long statTime = System.currentTimeMillis();
         // double[] result = selectionSort(list);
         // double[] result = insertionSort(list);
         // double[] result = bubbleSort(list);
         // double[] result = mergeSort(list);
-        double[] result = quickSort(list);
+        // double[] result = quickSort(list);
+        Double[] result = heapSort(list);
         long endTime = System.currentTimeMillis();
         System.out.println("The sorted list is: " + Arrays.toString(result));
         System.out.println("Cost time: " + (endTime - statTime) + "ms");
